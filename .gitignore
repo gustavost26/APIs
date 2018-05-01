@@ -1,0 +1,17 @@
+email/node_modules/
+email/.vscode/
+email/.idea/
+email/build/
+email/**/*.js
+
+token/node_modules/
+token/.vscode/
+token/.idea/
+token/build/
+token/**/*.js
+
+uber/node_modules/
+uber/.vscode/
+uber/.idea/
+uber/build/
+uber/**/*.js

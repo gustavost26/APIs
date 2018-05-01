@@ -1,0 +1,32 @@
+{
+  "name": "email",
+  "version": "1.0.0",
+  "description": "API Email",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cp-config": "mkdir -p build/config/env && cp config/env/config.\"$NODE_ENV\".json build/config/env",
+    "build": "tsc && npm run cp-config && npm start",
+    "start": "node build/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "http-status": "^1.0.1",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.0.13",
+    "nconf": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^1.0.0",
+    "@types/express": "^4.11.1",
+    "@types/http-status": "^0.2.30",
+    "@types/jsonwebtoken": "^7.2.6",
+    "@types/mongoose": "^5.0.7",
+    "@types/nconf": "0.0.37",
+    "typescript": "^2.8.3"
+  }
+}

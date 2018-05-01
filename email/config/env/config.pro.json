@@ -1,0 +1,14 @@
+{
+    "servidor": {
+        "porta": 3000
+    },
+    "email": {
+        "host": "smtp.ethereal.email",
+        "port": 587,
+        "security": false,
+        "auth": {
+            "user": "fqv3qmx7bptvzktv@ethereal.email",
+            "pass": "etxVxeg4k41DcXc5eh"
+        }
+    }
+}

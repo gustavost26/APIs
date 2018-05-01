@@ -1,0 +1,28 @@
+{
+  "name": "email",
+  "version": "1.0.0",
+  "description": "API Email",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cp-config": "mkdir -p build/config/env && cp config/env/config.\"$NODE_ENV\".json build/config/env",
+    "build": "tsc && npm run cp-config && npm start",
+    "start": "node build/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.13",
+    "nconf": "^0.10.0",
+    "nodemailer": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.11.1",
+    "@types/mongoose": "^5.0.7",
+    "@types/nconf": "0.0.37",
+    "@types/nodemailer": "^4.6.0",
+    "typescript": "^2.8.3"
+  }
+}
