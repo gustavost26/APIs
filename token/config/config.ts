@@ -19,7 +19,7 @@ export interface IConfiguracaoBancoDados {
   stringConexao: string;
 }
 
-export interface IConfig {
+export interface IConfigToken {
   secret: string;
 }
 
@@ -29,5 +29,5 @@ export const getConfiguracaoBancoDados = (): IConfiguracaoBancoDados =>
 export const getConfiguracaoServidor = (): IConfiguracaoServidor =>
   configs.get('servidor');
 
-export const getConfig = (): IConfig =>
+export const getConfigToken = (): IConfigToken =>
   configs.get('token');

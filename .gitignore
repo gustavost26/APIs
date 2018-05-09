@@ -1,3 +1,6 @@
+.idea/
+.vscode/
+
 email/node_modules/
 email/.vscode/
 email/.idea/

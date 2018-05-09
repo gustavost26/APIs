@@ -21,6 +21,15 @@ export const getById = async (id: any) => {
     }
 }
 
+export const getByEmail = async (email: any) => {
+    try {
+        return await UsuarioModel.findOne(email);
+    } catch(error) {
+        console.log('getById: ', error);
+        throw error;
+    }
+}
+
 export const create = async (pessoa: any) => {
     try {
         return await PessoaModel.create(pessoa);

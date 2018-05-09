@@ -1,4 +1,4 @@
-import {Request, Response} from 'express';
+import {Request, Response, NextFunction} from 'express';
 import { PessoaModel, IPessoaModel } from '../models/pessoa';
 import { emailValidate } from '../commons/utils/validate';
 import * as bcrypt from 'bcrypt';
@@ -9,7 +9,7 @@ import PessoaDatabase from '../providers/pessoa';
 import axios from 'axios';
 
 const sendJsonResponse = (res: Response, statusCode: number, data: any) => {
-    res.status(statusCode).json({'result: ': data});
+    res.status(statusCode).json({'result': data});
 }
 
 export default class Pessoa {
@@ -19,7 +19,7 @@ export default class Pessoa {
         this.pessoaDatabase = new PessoaDatabase();
     }
 
-    public async getAll(req: Request, res: Response){
+    public async getAll(req: Request, res: Response, next: NextFunction){
         try {
             const pessoas = await database.getAll();
             sendJsonResponse(res, HttpStatus.OK, pessoas);
@@ -28,7 +28,7 @@ export default class Pessoa {
         }
     }
 
-    public async getById(req: Request, res: Response){
+    public async getById(req: Request, res: Response, next: NextFunction){
         const id = req.params.id;
             
         if (!id) {
@@ -96,7 +96,7 @@ export default class Pessoa {
         }        
     }
 
-    public async update(req: Request, res: Response){
+    public async update(req: Request, res: Response, next: NextFunction){
         const id = req.params.id;
         const pessoa = req.body;
 
@@ -108,7 +108,7 @@ export default class Pessoa {
         }
     }
 
-    public async remove(req: Request, res: Response){
+    public async remove(req: Request, res: Response, next: NextFunction){
         const id: any = {_id: req.params.id};
 
         try {

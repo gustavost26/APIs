@@ -19,21 +19,8 @@ export interface IConfiguracaoBancoDados {
   stringConexao: string;
 }
 
-export interface IConfigEmail {
-  host: string;
-  port: number;
-  security: boolean;
-  auth: {
-      user: string;
-      pass: string;
-  }
-}
-
 export const getConfiguracaoServidor = (): IConfiguracaoServidor =>
   configs.get('servidor');
 
 export const getConfiguracaoBancoDados = (): IConfiguracaoBancoDados =>
   configs.get('bancoDados');
-
-export const getConfigEmail = (): IConfigEmail =>
-  configs.get('email');

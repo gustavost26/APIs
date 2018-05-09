@@ -3,9 +3,9 @@
         "stringConexao": "mongodb://localhost:27017/aula2"
     },
     "servidor": {
-        "porta": 3000
+        "porta": 3002
     },
     "token" : {
-        "secret": "supersecretDragonBallZ2018"
+        "secret": "sup€rsecretDragonB@llZ2018"
     }
 }
