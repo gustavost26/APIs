@@ -8,7 +8,7 @@ export interface IUsuarioModel extends Document {
 }
 
 export const UsuarioSchema = new Schema({
-  email: { type: String, required: [true, 'Nome é obrigatório.'] },
+  email: { type: String, unique: true, required: [true, 'Nome é obrigatório.'] },
   senha: { type: String, required: [true, 'Senha é obrigatório'] },
   token: { type: String},
   dataCriacao: { type: Date, default: Date.now }

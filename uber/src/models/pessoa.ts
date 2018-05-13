@@ -14,7 +14,7 @@ export const PessoaSchema = new Schema({
     dt_nascimento: {type: Date, required: [true, 'Data de Nascimento é obrigatorio']},
     telefone: {type: String, required: [true, 'Telefone é obrigatorio']},
     nif: {type: Number, unique: true, required: [true, 'Nif é obrigatorio']},
-    id_usuario: {type: Schema.Types.ObjectId, unique: true, required: [false, 'Id do usuário é obrigatorio']},
+    id_usuario: {type: Schema.Types.ObjectId, unique: true, required: [true, 'Id do usuário é obrigatorio']},
     dataCriacao: {type: Date, default: Date.now }
 });
 

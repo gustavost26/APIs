@@ -1,6 +1,7 @@
 import { PessoaModel } from '../models/pessoa';
 import { UsuarioModel } from '../models/usuario';
 import { MotoristaModel } from '../models/motorista';
+import { LocalizacaoModel } from '../models/localizacao';
 import * as ErrorUtil from '../commons/utils/error';
 
 export const getAll = async () => {
@@ -39,6 +40,8 @@ export const create = async (pessoa: any) => {
     }
 }
 
+
+
 export const createUser = async (usuario: any) => {
     try {
         return await UsuarioModel.create(usuario);
@@ -50,7 +53,17 @@ export const createUser = async (usuario: any) => {
 
 export const update = async (id: number, pessoa: any) => {
     try {
+        console.log('entrou 1', id, pessoa);
         return PessoaModel.findByIdAndUpdate(id, pessoa);
+    } catch(error) {
+        console.log('update: ', error);
+        throw error;
+    }
+}
+
+export const updateUser = async (id: number, user: any) => {
+    try {
+        return UsuarioModel.findByIdAndUpdate(id, user);
     } catch(error) {
         console.log('update: ', error);
         throw error;
@@ -60,6 +73,15 @@ export const update = async (id: number, pessoa: any) => {
 export const remove = async (id: number) => {
     try {
         return await PessoaModel.remove(id);
+    } catch(error) {
+        console.log('Remover: ', error);
+        throw error;
+    }
+}
+
+export const removeUser = async (id: number) => {
+    try {
+        return await UsuarioModel.remove(id);
     } catch(error) {
         console.log('Remover: ', error);
         throw error;
@@ -89,6 +111,33 @@ export const createMotorista = async (pessoa: any) => {
         return await MotoristaModel.create(pessoa);
     } catch(error) {
         console.log('create: ', error);
+        throw error;
+    }
+}
+
+export const createLocalizacao = async (localizacao: any) => {
+    try {
+        return await LocalizacaoModel.create(localizacao);
+    } catch(error) {
+        console.log('create: ', error);
+        throw error;
+    }
+}
+
+export const getByIdLocalizacao = async (id: any) => {
+    try {
+        return await LocalizacaoModel.find({id_user: id});
+    } catch(error) {
+        console.log('getById: ', error);
+        throw error;
+    }
+}
+
+export const updateLocalizacao= async (id: number, localizacao: any) => {
+    try {
+        return LocalizacaoModel.findByIdAndUpdate(id, localizacao);
+    } catch(error) {
+        console.log('update: ', error);
         throw error;
     }
 }

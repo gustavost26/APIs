@@ -4,7 +4,7 @@ export interface IMotoristaModel extends Document {
     nome: string;
     dt_nascimento: Date;
     cnh: string;
-    user: number;
+    id_user: Schema.Types.ObjectId;
     endereco: {
         rua: string;
         numero: number;
@@ -12,7 +12,7 @@ export interface IMotoristaModel extends Document {
         estado: string;
         cidade: string;
         pais: string;
-    }
+    };
     telefone: string;
     veiculo: {
         marca: string;
@@ -25,19 +25,11 @@ export interface IMotoristaModel extends Document {
     dataCriacao?: Date;
 }
 
-export interface ILacalizaçãoMotoristaModel extends Document {
-    id_motorista: Schema.Types.ObjectId;
-    localizacao: {
-        latitude: number;
-        longitude: number;
-    };
-    data: Date;
-
-}
-
 export const MotoristaSchema = new Schema({
     nome: {type: String, required: [true, 'Nome é obrigatorio']},
     dt_nascimento: {type: Date, required: [true, 'Data de Nascimento é obrigatorio']},
+    cnh: {type: String, unique: true, required: [true, 'cnh é obrigatorio']},
+    id_user: {type: String, required: [true, 'id_user é obrigatorio']},
     endereco: {
         rua: {type: String, required: [true, 'Rua é obrigatorio']},
         numero: {type: String, required: [true, 'Numero é obrigatorio']},
@@ -58,14 +50,4 @@ export const MotoristaSchema = new Schema({
     dataCriacao: {type: Date, default: Date.now }
 });
 
-export const LocalizacaoSchema = new Schema({
-    id_motorista: {type: Schema.Types.ObjectId, required: [true, 'Id é obrigatorio']},
-    localizacao: {
-        latitude: {type: Number, required: [true, 'Latitude é obrigatorio']},
-        longitude: {type: Number, required: [true, 'Longitude é obrigatorio']},
-    },
-    data: {type: Date, default: Date.now }
-});
-
 export const MotoristaModel = model<IMotoristaModel>('Motorista', MotoristaSchema);
-export const LocalizacaoModel = model<ILacalizaçãoMotoristaModel>('Localizacao', LocalizacaoSchema);

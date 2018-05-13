@@ -1,4 +1,4 @@
-import {Request, Response, NextFunction} from 'express';
+import {Request, Response} from 'express';
 import { PessoaModel, IPessoaModel } from '../models/pessoa';
 import { emailValidate } from '../commons/utils/validate';
 import * as bcrypt from 'bcrypt';
@@ -7,6 +7,8 @@ import * as ErrorUtil from '../commons/utils/error';
 import * as database from '../providers/database';
 import PessoaDatabase from '../providers/pessoa';
 import axios from 'axios';
+import { UsuarioModel } from '../models/usuario';
+import { removeUser } from '../providers/database';
 
 const sendJsonResponse = (res: Response, statusCode: number, data: any) => {
     res.status(statusCode).json({'result': data});
@@ -19,7 +21,7 @@ export default class Pessoa {
         this.pessoaDatabase = new PessoaDatabase();
     }
 
-    public async getAll(req: Request, res: Response, next: NextFunction){
+    public async getAll(req: Request, res: Response){
         try {
             const pessoas = await database.getAll();
             sendJsonResponse(res, HttpStatus.OK, pessoas);
@@ -28,7 +30,7 @@ export default class Pessoa {
         }
     }
 
-    public async getById(req: Request, res: Response, next: NextFunction){
+    public async getById(req: Request, res: Response){
         const id = req.params.id;
             
         if (!id) {
@@ -76,9 +78,7 @@ export default class Pessoa {
                             assunto: 'Confirmação de cadastro' ,
                             mensagem: 'Cadastro realizado com sucesso!'
                         }
-                    );
-
-                    console.log(resultEmail.data);                    
+                    );                 
 
                     if(resultEmail.data){                      
                         sendJsonResponse(res, HttpStatus.CREATED, `Usuário criado com sucesso. Foi enviado um email para o novo usuário: ${resultEmail.data}`);                      
@@ -96,24 +96,42 @@ export default class Pessoa {
         }        
     }
 
-    public async update(req: Request, res: Response, next: NextFunction){
+    public async update(req: Request, res: Response){
         const id = req.params.id;
         const pessoa = req.body;
 
         try {
-            await database.update(id, pessoa);
+            const result: any = await database.update(id, pessoa);
+
+            if(pessoa.email || pessoa.senha) {
+                const user = {
+                    email: pessoa.email,
+                    senha: bcrypt.hashSync(pessoa.senha, 10)
+                }
+
+                await database.updateUser(result.id_usuario, user);
+            }
             sendJsonResponse(res, HttpStatus.OK, 'Usuário atualizado');
         } catch(error) {
             res.status(ErrorUtil.generateHttpCode(error)).send(error.errors);
         }
     }
 
-    public async remove(req: Request, res: Response, next: NextFunction){
+    public async remove(req: Request, res: Response){
         const id: any = {_id: req.params.id};
 
         try {
-            const result = await database.remove(id);
-            sendJsonResponse(res, HttpStatus.OK, result);
+            const resultPessoa: any = await database.getById(id);
+            const id_usuario: any = {_id: resultPessoa.id_usuario};
+            const removeUsuario = await database.removeUser(id_usuario);
+            const removePessoa = await database.remove(id);
+
+            if(removeUsuario){
+                sendJsonResponse(res, HttpStatus.OK, 'Usuário removido com sucesso!');
+            } else {
+                sendJsonResponse(res, HttpStatus.INTERNAL_SERVER_ERROR , 'Erro ao remover o usuário!');
+            }
+
         } catch(error) {
             res.status(ErrorUtil.generateHttpCode(error)).send(error.errors);
         }
