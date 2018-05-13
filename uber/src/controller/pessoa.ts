@@ -7,8 +7,6 @@ import * as ErrorUtil from '../commons/utils/error';
 import * as database from '../providers/database';
 import PessoaDatabase from '../providers/pessoa';
 import axios from 'axios';
-import { UsuarioModel } from '../models/usuario';
-import { removeUser } from '../providers/database';
 
 const sendJsonResponse = (res: Response, statusCode: number, data: any) => {
     res.status(statusCode).json({'result': data});
