@@ -15,10 +15,15 @@ const sendJsonResponse = (res: Response, statusCode: number, data: any) => {
 
 export default class Motorista {
 
-    public async getAll(req: Request, res: Response){
+    public async motoristaMaisProximo(req: Request, res: Response){
         try {
-            const motoristas = await database.getAllMotorista();
+            const motoristas = await database.findMotoristaLocalizacao(req.body.latitude, req.body.longitude);
+
+            console.log('motoristas', motoristas);
+
             sendJsonResponse(res, HttpStatus.OK, motoristas);
+
+            
         } catch(error) {
             res.status(ErrorUtil.generateHttpCode(error)).send(error.errors);
         }

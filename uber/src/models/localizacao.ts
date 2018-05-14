@@ -12,7 +12,7 @@ export interface ILocalizacaoModel extends Document {
 
 export const LocalizacaoSchema = new Schema({
     id_user: {type: Schema.Types.ObjectId, required: [true, 'Id é obrigatorio']},
-    motorista: {type: Boolean, required: [true, 'flag é obrigatorio']},
+    motorista: {type: Boolean, required: [true, 'Motorista é obrigatorio']},
     localizacao: {
         latitude: {type: Number, required: [true, 'Latitude é obrigatorio']},
         longitude: {type: Number, required: [true, 'Longitude é obrigatorio']},
