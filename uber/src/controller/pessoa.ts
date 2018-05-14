@@ -1,5 +1,4 @@
 import {Request, Response} from 'express';
-import { PessoaModel, IPessoaModel } from '../models/pessoa';
 import { emailValidate } from '../commons/utils/validate';
 import * as bcrypt from 'bcrypt';
 import * as HttpStatus from 'http-status';

@@ -1,12 +1,9 @@
-import { updateMotorista, getByIdMotorista, create, removeLocalizacao } from './../providers/database';
 import {Request, Response} from 'express';
 import { LocalizacaoModel, ILocalizacaoModel } from '../models/localizacao';
-import { emailValidate } from '../commons/utils/validate';
-import * as bcrypt from 'bcrypt';
 import * as HttpStatus from 'http-status';
 import * as ErrorUtil from '../commons/utils/error';
 import * as database from '../providers/database';
-import axios from 'axios';
+
 
 const sendJsonResponse = (res: Response, statusCode: number, data: any) => {
     res.status(statusCode).json({'result': data});

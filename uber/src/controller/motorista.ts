@@ -1,4 +1,3 @@
-import { updateMotorista, getByIdMotorista } from './../providers/database';
 import {Request, Response} from 'express';
 import { MotoristaModel, IMotoristaModel } from '../models/motorista';
 import { emailValidate } from '../commons/utils/validate';
@@ -7,7 +6,6 @@ import * as HttpStatus from 'http-status';
 import * as ErrorUtil from '../commons/utils/error';
 import * as database from '../providers/database';
 import axios from 'axios';
-import { removeMotorista } from '../providers/database';
 
 const sendJsonResponse = (res: Response, statusCode: number, data: any) => {
     res.status(statusCode).json({'result': data});
