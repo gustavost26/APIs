@@ -108,7 +108,7 @@ export const getByIdMotorista = async (id: any) => {
 }
 
 export const findMotoristaLocalizacao = async (lat: number, log: number) => {
-    try {
+    /*try {
         return await LocalizacaoModel.find({localizacao:{$nearSphere:{
             $geometry:
             {type:"Point", coordinates:[lat, log]}
@@ -116,7 +116,7 @@ export const findMotoristaLocalizacao = async (lat: number, log: number) => {
     } catch(error) {
         console.log('get: ', error);
         throw error;
-    }
+    }*/
 }
 
 export const createMotorista = async (pessoa: any) => {

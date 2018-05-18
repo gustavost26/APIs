@@ -27,6 +27,15 @@ export default class Motorista {
         }
     }
 
+    public async getAll(req: Request, res: Response){
+        try {
+            const motorista = await database.getAllMotorista();
+            sendJsonResponse(res, HttpStatus.OK, motorista);
+        } catch(error) {
+            res.status(ErrorUtil.generateHttpCode(error)).send(error.errors);
+        }
+    }
+
     public async getById(req: Request, res: Response){
         const id = req.params.id;
             
